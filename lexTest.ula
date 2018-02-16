@@ -1,0 +1,6 @@
+let a = 'foo' #Whoa big woha
+let b = a * b
+
+let bar = function(c, d) {
+
+}

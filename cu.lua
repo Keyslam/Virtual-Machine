@@ -35,7 +35,6 @@ function CU.step()
    if CU.running then
       local numInst = CU.fetch()
       local inst, argCount, name = CU.decode(numInst)
-      --print(name)
       CU.execute(inst, argCount)
    end
 end

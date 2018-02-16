@@ -5,14 +5,15 @@ local Instructions = require("instructions")
 local CU           = require("CU")
 
 local Assembler = require("assembler_lua")
-
+local Lexer     = require("lexer_lua2")
 
 CU.running = false
 
 function love.update(dt)
-   CU.step()
+   for i = 1, 1000 do
+      CU.step()
+   end
    FB.render()
-   love.timer.sleep(0.025)
 end
 
 
@@ -27,15 +28,18 @@ function love.keypressed(key)
 end
 
 function love.filedropped(file)
+   --[[
    local asm = Assembler.translate(file)
    if asm then
       for address = 0, 0xFFFF do
          if asm[address] then
             Ram.set(address, asm[address])
-            print(address, asm[address])
          end
       end
    end
+   ]]
+
+   Lexer.lex(file)
 end
 
 --[[

@@ -29,26 +29,31 @@ function Assembler.translate(file)
       local inst    = Instructions[numInst]
 
       if inst[2] ~= #words-1 then
-         print("Invalid arguments. #"..cl)
+         print(inst[2])
+         print("Invalid arguments. #"..cl, inst[3])
          return
       end
 
       prgm[c] = numInst
+      print(c.. ": " ..inst[3])
+
       c = c + 1
+
 
       for i = 2, #words do
          local v = words[i]
 
          if not tonumber(v) then
+            print(c.. ": " ..v)
             if not vars[v] then
                vars[v] = Assembler.address
                Assembler.address = Assembler.address - 1
             end
-
             v = vars[v]
          end
 
          prgm[c] = v
+
          c = c + 1
       end
 
